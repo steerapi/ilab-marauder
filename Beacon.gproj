@@ -1,0 +1,81 @@
+<project>
+ <properties autorotation="0" encrypt="0" fps="60" scaleMode="3" mouseToTouch="1" iosDevice="0" packageName="com.ordercrunch.beacon" logicalHeight="800" logicalWidth="480" mouseTouchOrder="0" retinaDisplay="0" touchToMouse="1" assetsOnly="1" orientation="0" architecture="1">
+  <imageScales/>
+ </properties>
+ <file source="sample.png"/>
+ <file source="util.lua"/>
+ <file source="sample.lua"/>
+ <file source="cron.lua"/>
+ <file source="ilab.png"/>
+ <file source="socket.lua"/>
+ <file source="TextWrap.lua"/>
+ <file source="here.lua"/>
+ <folder name="server">
+  <file source="server/server.txt"/>
+  <file source="server/server.lua"/>
+ </folder>
+ <folder name="buttons">
+  <file source="buttons/heregreen.png"/>
+  <file source="buttons/here.png"/>
+  <file source="buttons/broadcast_on.png"/>
+  <file source="buttons/broadcast_off.png"/>
+  <file source="buttons/save_on.png"/>
+  <file source="buttons/save_off.png"/>
+  <file source="buttons/remove_on.png"/>
+  <file source="buttons/remove_off.png"/>
+  <file source="buttons/measure_on.png"/>
+  <file source="buttons/measure_off.png"/>
+  <file source="buttons/lock_on.png"/>
+  <file source="buttons/lock_off.png"/>
+  <file source="buttons/locate_on.png"/>
+  <file source="buttons/locate_off.png"/>
+  <file source="buttons/bluetooth_on.png"/>
+  <file source="buttons/bluetooth_off.png"/>
+  <file source="buttons/anchor.png"/>
+  <file source="buttons/advanced_on.png"/>
+  <file source="buttons/advanced_off.png"/>
+  <file source="buttons/add_on.png"/>
+  <file source="buttons/add_off.png"/>
+ </folder>
+ <folder name="firebase">
+  <file source="firebase/firebase.txt"/>
+  <file source="firebase/firebase.lua"/>
+ </folder>
+ <folder name="img">
+  <file source="img/base/key.png"/>
+  <file source="img/base/key2.png"/>
+  <file source="img/base/key3.png"/>
+  <file source="img/base/keyHigh.png"/>
+  <file source="img/base/keyHigh2.png"/>
+  <file source="img/base/keyHigh3.png"/>
+  <file source="img/base/LOWERCASE.png"/>
+ </folder>
+ <folder name="kinvey">
+  <file source="kinvey/kinvey.txt"/>
+  <file source="kinvey/kinvey.lua"/>
+ </folder>
+ <folder name="locale">
+  <file source="locale/sv_SE.lua"/>
+  <file source="locale/ru_RU.lua"/>
+  <file source="locale/en_GB.lua"/>
+  <file source="locale/de_DE.lua"/>
+ </folder>
+ <folder name="util">
+  <file source="util/rest.lua"/>
+  <file source="util/Json.lua"/>
+  <file source="util/inspect.lua"/>
+  <file source="util/b64enc.lua"/>
+ </folder>
+ <file source="Camera.lua"/>
+ <file source="InputKeyboard.lua"/>
+ <file source="arial.ttf"/>
+ <file source="billo.ttf"/>
+ <file source="button.lua"/>
+ <file downsizing="1" source="button_down.png"/>
+ <file downsizing="1" source="button_up.png"/>
+ <file source="main.lua"/>
+ <file source="pin.lua"/>
+ <file source="pin.png"/>
+ <file source="snapper.lua"/>
+ <file source="togglebutton.lua"/>
+</project>

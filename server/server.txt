@@ -1,0 +1,23 @@
+-----------------------------------------------------------------------------------------
+-- Server API
+-----------------------------------------------------------------------------------------
+return {
+   name = "Server API",
+   version = 0,
+   methods = {
+
+      locate = {
+         path = "v1/locate",
+         required_payload = true,
+         method = "POST",
+      },
+
+	  sample = {
+         path = "v1/sample",
+         required_payload = true,
+         method = "GET",
+      }
+
+   },
+};
+
