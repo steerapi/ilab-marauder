@@ -10,15 +10,15 @@ end
 
 -- Create advance bar
 
-local lockBtn = createToggleButton("buttons/lock_off.png","buttons/lock_on.png")
+local lockBtn = Utils.createToggleButton("buttons/lock_off.png","buttons/lock_on.png")
 snapToTopLeft(lockBtn)
-local addBtn = createButton("buttons/add_off.png","buttons/add_on.png")
+local addBtn = Utils.createButton("buttons/add_off.png","buttons/add_on.png")
 snapToTopLeft(addBtn,96)
-local removeBtn = createToggleButton("buttons/remove_off.png","buttons/remove_on.png")
+local removeBtn = Utils.createToggleButton("buttons/remove_off.png","buttons/remove_on.png")
 snapToTopLeft(removeBtn,96*2)
-local saveBtn = createButton("buttons/save_off.png","buttons/save_on.png")
+local saveBtn = Utils.createButton("buttons/save_off.png","buttons/save_on.png")
 snapToTopLeft(saveBtn,96*3)
-local measureBtn = createToggleButton("buttons/measure_off.png","buttons/measure_on.png")
+local measureBtn = Utils.createToggleButton("buttons/measure_off.png","buttons/measure_on.png")
 snapToTopLeft(measureBtn,96*4)
 
 application.advanceBar = Sprite.new()

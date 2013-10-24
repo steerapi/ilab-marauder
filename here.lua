@@ -7,7 +7,7 @@ Here = Core.class(Sprite)
 
 function Here:updateLabel()
 	local x,y = self:getPosition()
-	self.locLabel:setText("("..formatNumber(x)..","..formatNumber(y)..")")
+	self.locLabel:setText("("..Utils.formatNumber(x)..","..Utils.formatNumber(y)..")")
 end
 
 local font = TTFont.new("arial.ttf",15,true)

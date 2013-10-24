@@ -2,14 +2,22 @@
  <properties autorotation="0" encrypt="0" fps="60" scaleMode="3" mouseToTouch="1" iosDevice="0" packageName="com.ordercrunch.beacon" logicalHeight="800" logicalWidth="480" mouseTouchOrder="0" retinaDisplay="0" touchToMouse="1" assetsOnly="1" orientation="0" architecture="1">
   <imageScales/>
  </properties>
+ <folder name="components">
+  <file source="mapname.lua"/>
+  <file source="usernamebox.lua"/>
+  <file source="button.lua"/>
+  <file source="pin.lua"/>
+  <file source="togglebutton.lua"/>
+  <file source="people.lua"/>
+  <file source="sample.lua"/>
+  <file source="here.lua"/>
+ </folder>
  <file source="sample.png"/>
  <file source="util.lua"/>
- <file source="sample.lua"/>
  <file source="cron.lua"/>
+ <file source="TextWrap.lua"/>
  <file source="ilab.png"/>
  <file source="socket.lua"/>
- <file source="TextWrap.lua"/>
- <file source="here.lua"/>
  <folder name="server">
   <file source="server/server.txt"/>
   <file source="server/server.lua"/>
@@ -70,12 +78,9 @@
  <file source="InputKeyboard.lua"/>
  <file source="arial.ttf"/>
  <file source="billo.ttf"/>
- <file source="button.lua"/>
  <file downsizing="1" source="button_down.png"/>
  <file downsizing="1" source="button_up.png"/>
  <file source="main.lua"/>
- <file source="pin.lua"/>
  <file source="pin.png"/>
  <file source="snapper.lua"/>
- <file source="togglebutton.lua"/>
 </project>

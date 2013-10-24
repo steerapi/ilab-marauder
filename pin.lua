@@ -28,7 +28,7 @@ function Beacon:init(x,y,bitmap)
 
 	local fontSize = 15
 	local font = TTFont.new("arial.ttf",fontSize,true)
-	self.locLabel = TextField.new(font, "("..formatNumber(x)..","..formatNumber(y)..")")
+	self.locLabel = TextField.new(font, "("..Utils.formatNumber(x)..","..Utils.formatNumber(y)..")")
 	self.locLabel:setPosition(40,-10)
 	self:addChild(self.locLabel)
 

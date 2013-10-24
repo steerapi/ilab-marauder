@@ -1,101 +1,34 @@
-
 -- Create a firebase object
-
 firebase = Firebase.new("https://beacon.firebaseio.com/")
 server = Server.new("http://marauder.aws.af.cm/")
 
 application.username = "guest"..math.random(0,100)
 
---[[
--- Write a lua table and then get a subtable
-firebase:write("new/data", { gideros = "Gideros Mobile", thisIs = { anExample = { ofANested = "table" } } }, function(r)
-   if r.error then
-      print("ERROR")
-      print(r.url)
-   else
-      firebase:get("new/data")
-      firebase:get("new/data/thisIs/anExample")
-   end
-end)
-
-
--- Write another lua table, then delete part of it
-firebase:write("anotherExample", { 1,2,3,4,5,6,6,8, anotherTable={444,444,44,44,44} }, function(r)
-   if r.error then
-      print("ERROR")
-      print(r.url)
-   else
-      firebase:remove("anotherExample/anotherTable")
-   end
-end)
-
-
--- Append elements to a collection
-firebase:append("gideros/chatroom", { name="ND", msg="amessage" }, function(r)
-   if r.error then
-      print("ERROR")
-      print(r.url)
-   else
-      firebase:get("gideros/chatroom", function(r)
-         if not r.error then
-            print("---> CHAT MESSAGES <---")
-            for i,v in pairs(r.data) do
-               print(v.name .. " said: " .. v.msg)
-            end
-         end
-      end)
-   end
-end)
-]]
-
 if application:getDeviceInfo() == "Android" then
 	require("bluetooth")
 end
 
-if application:getDeviceInfo() == "Android" then
-    --require your plugin
-	--[[
-    require("exampleplugin")
- 
-     local text = TextField.new(nil, exampleplugin.modifyString(" world"))
-    text:setPosition(300, 300);
-    stage:addChild(text)
- 
-    local text = TextField.new(nil, exampleplugin.addNumbers(21, 22).."")
-    text:setPosition(300, 300);
-    stage:addChild(text)
-	]]
-    --use your plugin methods
-	--[[
-	bluetooth:enable()
-	bluetooth:discoverDevices()
-	bluetooth:addEventListener(Event.DISCOVERY_FINISHED, function(event) 
-	
-	end)]]
-	--Bluetooth:discoverDevices()
-	--require("facebook")
-	
-end
-
+-- Set logical dimension
 application:setLogicalDimensions(480,800)
 
+-- Create Keyboard
 application.keyboard = KeyBoard.new()
 application.keyboard:Create()
 
+-- Create Camera
 local camera = Camera.new({minZoom=0.1,maxZoom=3.0,friction=.1})
 stage:addChild(camera)
 application.camera = camera
 
--- Add map
+-- Add map to camera
 local map = Bitmap.new(Texture.new("ilab.png"))
 camera:addChild(map)
-
 -- Center camera
 camera:centerPoint(map:getWidth()/2,map:getHeight()/2)
 
--- Add Beacon
-
+-- Create Beacon Group
 beaconGroup = Sprite.new()
+-- Create Sample Group
 sampleGroup = Sprite.new()
 
 local function addPin()
@@ -105,88 +38,23 @@ local function addPin()
 	beaconGroup:addChild(beacon)
 end
 
---[[
+-- Create tool bar
+-- Set up bottom buttons
+local bluetoothBtn = Utils.createToggleButton("buttons/bluetooth_off.png","buttons/bluetooth_on.png")
+Snapper.snapToBottomRight(bluetoothBtn,-96*3)
+local broadcastBtn = Utils.createToggleButton("buttons/broadcast_off.png","buttons/broadcast_on.png")
+Snapper.snapToBottomRight(broadcastBtn,-96*2)
+local locateBtn = Utils.createToggleButton("buttons/locate_off.png","buttons/locate_on.png")
+Snapper.snapToBottomRight(locateBtn,-96)
+local advancedBtn = Utils.createToggleButton("buttons/advanced_off.png","buttons/advanced_on.png")
+Snapper.snapToBottomRight(advancedBtn)
 
--- Add Beacon Button
-
-local dropPinUp = Bitmap.new(Texture.new("button_up.png"))
-local dropPinDown = Bitmap.new(Texture.new("button_down.png"))
-local dropPinBtn = Button.new(dropPinUp, dropPinDown)
-dropPinBtn:addEventListener("click", 
-	function() 
-		addPin()
-	end)
-stage:addChild(dropPinBtn)
-snapToBottomLeft(dropPinBtn)
-
--- Lock Toggle Button
-
-local lockBeaconUp = Bitmap.new(Texture.new("button_up.png"))
-local lockBeaconDown = Bitmap.new(Texture.new("button_down.png"))
-local lockBeaconTBtn = ToggleButton.new(lockBeaconUp, lockBeaconDown)
-			
-lockBeaconTBtn:addEventListener("on", 
-	function()
-		for i = 1, beaconGroup:getNumChildren() do
-			beacon = beaconGroup:getChildAt(i)
-			beacon:setLocked(true)
-		end
-	end)
-lockBeaconTBtn:addEventListener("off", 
-	function()
-		for i = 1, beaconGroup:getNumChildren() do
-			beacon = beaconGroup:getChildAt(i)
-			beacon:setLocked(false)
-		end
-	end)
-
-stage:addChild(lockBeaconTBtn)
-snapToTopLeft(lockBeaconTBtn)
-
--- Save Button
-
-local saveUp = Bitmap.new(Texture.new("button_up.png"))
-local saveDown = Bitmap.new(Texture.new("button_down.png"))
-local saveBtn = Button.new(saveUp, saveDown)
-			
-saveBtn:addEventListener("click", 
-	function()
-	
-	end)
-
-stage:addChild(saveBtn)
-snapToTopRight(saveBtn)
-
--- Zero Profiling Button
-
-local zeroProfUp = Bitmap.new(Texture.new("button_up.png"))
-local zeroProfDown = Bitmap.new(Texture.new("button_down.png"))
-local zeroProfBtn = Button.new(zeroProfUp, zeroProfDown)
-			
-zeroProfBtn:addEventListener("click", 
-	function()
-	
-	end)
-
-stage:addChild(zeroProfBtn)
-snapToBottomRight(zeroProfBtn)
-]]
-
-local bluetoothBtn = createToggleButton("buttons/bluetooth_off.png","buttons/bluetooth_on.png")
-snapToBottomRight(bluetoothBtn,-96*3)
-local broadcastBtn = createToggleButton("buttons/broadcast_off.png","buttons/broadcast_on.png")
-snapToBottomRight(broadcastBtn,-96*2)
-local locateBtn = createToggleButton("buttons/locate_off.png","buttons/locate_on.png")
-snapToBottomRight(locateBtn,-96)
-local advancedBtn = createToggleButton("buttons/advanced_off.png","buttons/advanced_on.png")
-snapToBottomRight(advancedBtn)
-
+-- Set up bottom button bar
 local toolbar = Sprite.new()
 toolbar:addChild(bluetoothBtn)
 toolbar:addChild(broadcastBtn)
 toolbar:addChild(locateBtn)
 toolbar:addChild(advancedBtn)
-
 stage:addChild(toolbar)
 
 -- Here
@@ -198,9 +66,8 @@ local locateHandler
 local measuring = false
 
 local statusTxt = TextWrap.new("", 300, "right")
-snapToBottomRight(statusTxt, -10,-100)
+Snapper.snapToBottomRight(statusTxt, -10,-100)
 stage:addChild(statusTxt)
-
 
 locateBtn:addEventListener("on", 
 	function()
@@ -238,7 +105,7 @@ locateBtn:addEventListener("on",
 					cBeacons[name] = cBeacons[name] + 1
 				end
 				count = count + 1
-				statusTxt:setText("Locating... " .. formatNumber(count/MAX_COUNT*100) .. "%")
+				statusTxt:setText("Locating... " .. Utils.formatNumber(count/MAX_COUNT*100) .. "%")
 				if count < MAX_COUNT then
 					socket.sleep(3)
 					bluetooth:discoverDevices()
@@ -353,17 +220,16 @@ bluetoothBtn:addEventListener("off",
 	end)
 	
 -- Create advance bar
-
-local lockBtn = createToggleButton("buttons/lock_off.png","buttons/lock_on.png")
-snapToTopRight(lockBtn, -96*4)
-local addBtn = createButton("buttons/add_off.png","buttons/add_on.png")
-snapToTopRight(addBtn, -96*3)
-local removeBtn = createToggleButton("buttons/remove_off.png","buttons/remove_on.png")
-snapToTopRight(removeBtn, -96*2)
-local saveBtn = createButton("buttons/save_off.png","buttons/save_on.png")
-snapToTopRight(saveBtn, -96*1)
-local measureBtn = createToggleButton("buttons/measure_off.png","buttons/measure_on.png")
-snapToTopRight(measureBtn, -96*0)
+local lockBtn = Utils.createToggleButton("buttons/lock_off.png","buttons/lock_on.png")
+Snapper.snapToTopRight(lockBtn, -96*4)
+local addBtn = Utils.createButton("buttons/add_off.png","buttons/add_on.png")
+Snapper.snapToTopRight(addBtn, -96*3)
+local removeBtn = Utils.createToggleButton("buttons/remove_off.png","buttons/remove_on.png")
+Snapper.snapToTopRight(removeBtn, -96*2)
+local saveBtn = Utils.createButton("buttons/save_off.png","buttons/save_on.png")
+Snapper.snapToTopRight(saveBtn, -96*1)
+local measureBtn = Utils.createToggleButton("buttons/measure_off.png","buttons/measure_on.png")
+Snapper.snapToTopRight(measureBtn, -96*0)
 
 local advanceBar = Sprite.new()
 advanceBar:addChild(lockBtn)
@@ -433,7 +299,7 @@ myAnchor:noInput()
 local measureHandler
 
 local loadSample = function()
-	clear(sampleGroup)
+	Utils.clearSprite(sampleGroup)
 	server:sample(nil, function(r) 
 		if r.error then
 			print("ERROR")
@@ -471,7 +337,7 @@ measureBtn:addEventListener("on",
 			measureText:setTextColor(0xff0000)
 
 			measureText:setTextColor(0xff0000)
-			snapToTopRight(measureText,-10,110)
+			Snapper.snapToTopRight(measureText,-10,110)
 			
 			measureHandler = function(event) 
 				beacons = {}
@@ -537,7 +403,7 @@ measureBtn:addEventListener("on",
 
 			stage:addChild(measureText)
 			measureText:setTextColor(0xff0000)
-			snapToTopRight(measureText,-10,110)
+			Snapper.snapToTopRight(measureText,-10,110)
 			
 			local function updateMeasure()
 				beacons = {}
@@ -614,7 +480,7 @@ removeBtn:addEventListener("off",
 	end)
 
 local loadBeacon = function()
-	clear(beaconGroup)
+	Utils.clearSprite(beaconGroup)
 	firebase:get("configs/ilab/beacons", function(r)
 		if not r.error then
 			for k,v in pairs(r.data) do
@@ -626,8 +492,6 @@ local loadBeacon = function()
 		end
 	end)
 end
-
-local topbar = Sprite.new()
 
 local function showAdvancedControl()
 	topbar:removeFromParent()
@@ -671,12 +535,12 @@ advancedBtn:addEventListener('on', function()
 	local font = TTFont.new("billo.ttf",fontSize,true)
 	local label = TextField.new(font, "Password: ")
 	label:setTextColor(0x0ff0000)
-	snapToCenter(label, 0, -40)
+	Snapper.snapToCenter(label, 0, -40)
 	passwordDialog:addChild(label)
 
 	local inputbox = InputBox.new(application:getContentWidth()/2,application:getContentHeight()/2, 200, 40)
 	--local x,y = inputbox:getPosition()
-	snapToCenter(inputbox)
+	Snapper.snapToCenter(inputbox)
 --	inputbox:setPosition(x-200/2,y-40/2)
 	inputbox:PasswordField(true)
 	inputbox:SetKeyBoard(application.keyboard)
@@ -700,133 +564,23 @@ advancedBtn:addEventListener('on', function()
 	application.keyboard:addEventListener("KeyboardHide", enter)
 end)
 
--- create Map name
-local function createMapName()
-	local fontSize = 30
-	local font = TTFont.new("billo.ttf",fontSize,true)
-	local label = TextField.new(font, "Harvard Innovation Lab")
-	label:setTextColor(0x000000)
-	snapToTopLeft(label,5,62)
-	local label2 = TextField.new(font, "Marauder's Map")
-	label2:setTextColor(0x000000)
-	snapToTopLeft(label2,5,32)
-	topbar:addChild(label)
-	topbar:addChild(label2)
-end
-createMapName()
+local mapName = MapName.new()
+stage:addChild(mapName)
 
-stage:addChild(topbar)
--- create username box
-local function createUsernameBox()
-	local usernameDialog = Sprite.new()
+local usernameBox = UsernameBox.new()
+stage:addChild(usernameBox)
+usernameBox:addEventListener("nameChanged", function(oldName, newName)
+	hereBitmap:setName(newName)
+end)
+				
 
-	local fontSize = 20
-	local font = TTFont.new("billo.ttf",fontSize,true)
-	local label = TextField.new(font, "Name: ")
-	label:setTextColor(0x666666)
-	snapToTopRight(label,-155,22)
-	usernameDialog:addChild(label)
-
-	local inputbox = InputBox.new(application:getContentWidth()/2,application:getContentHeight()/2, 150, 30)
-	--local x,y = inputbox:getPosition()
-	snapToTopRight(inputbox, 0, 0)
---	inputbox:setPosition(x-200/2,y-40/2)
-	inputbox:setText(application.username)
-	inputbox:SetKeyBoard(application.keyboard)
-	inputbox:setBoxColors(0x666666,0x666666,5,0.5)
-	inputbox:setActiveBoxColors(0x666666,0x666666,5,0.5)
-	usernameDialog:addChild(inputbox)
-	
-	topbar:addChild(usernameDialog)
-	
-	inputbox:addEventListener(Event.TOUCHES_BEGIN, function(event)
-		if inputbox:hitTestPoint(event.touch.x,event.touch.y) then
-			local function enter()
-				firebase:write("people/ilab/"..application.username, {})
-				application.username = inputbox:getText()
-				print(application.username)
-				hereBitmap:setName(application.username)
-				application.keyboard:removeEventListener('KeyboardHide', enter)
-			end
-			application.keyboard:addEventListener("KeyboardHide", enter)	
-		end
-	end)
-end 
-createUsernameBox()
-
-local hereFriends = Sprite.new()
-camera:addChild(hereFriends)
-
-local function populateFriends()
-	--Keep polling
-	firebase:get("people/ilab", function(r) 
-		hereFriends:removeFromParent()
-		hereFriends = Sprite.new()
-		camera:addChild(hereFriends)
-		if r.error then
-			print("ERROR")
-			print(r.url)
-		else
-			print("Updating")
-			if r.data ~= nil then
-				local t = os.date('*t')
-				local time = os.time(t)
-				for k,v in pairs(r.data) do
-					if v.time and math.abs(v.time - time) > 3600 then
-						firebase:write("people/ilab/"..k, {})
-					end
-					if application.username ~= k then
-						local hereFriend = Here.new("buttons/heregreen.png")
-						hereFriend.name:setTextColor(0x00ee00)
-						hereFriend:setName(k)
-						hereFriend:setPosition(v.x,v.y)
-						hereFriends:addChild(hereFriend)
-					end
-				end
-			end
-		end
-	end)
-end
-
-populateFriends()
-
-local function onPollTimer()
-	populateFriends()
-end
-
-local pollTimer = Timer.new(4000, 0)
- 
-pollTimer:addEventListener(Event.TIMER, onPollTimer, self)
-pollTimer:start()
+local people = People.new(4000)
+camera:addChild(people)
 
 if application:getDeviceInfo() == "Android" then
-
-    --require your plugin
-	--[[
-    require("exampleplugin")
- 
-     local text = TextField.new(nil, exampleplugin.modifyString(" world"))
-    text:setPosition(300, 300);
-    stage:addChild(text)
- 
-    local text = TextField.new(nil, exampleplugin.addNumbers(21, 22).."")
-    text:setPosition(300, 300);
-    stage:addChild(text)
-	]]
-    --use your plugin methods
+	-- force Bluetooth to be enable the first time the app runs
 	bluetooth:enable()
 	if bluetooth:isEnabled() then
 		bluetoothBtn:setOn()
 	end
-	--[[
-	bluetooth:discoverDevices()
-	bluetooth:addEventListener(Event.DISCOVERY_FINISHED, function(event) 
-		local text = TextField.new(nil, event.response)
-		text:setPosition(150, 150);
-		stage:addChild(text)	
-	end)
-	]]
-	--Bluetooth:discoverDevices()
-	--require("facebook")
-	
 end
